@@ -1,0 +1,66 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Package manager artifacts
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build and coverage output
+dist/
+build/
+coverage/
+.vite/
+*.tsbuildinfo
+
+# Runtime data and local configuration
+.env
+.env.*
+!.env.example
+*.sqlite
+*.sqlite-* 
+*.sqlite-shm
+*.sqlite-wal
+*.db
+*.db-*
+*.pre-restore
+.ledger-load-test-data/
+
+# Application secrets and uploaded/generated files
+data/pace_it_secret.key
+public/uploads/
+public/receipts/
+uploads/
+receipts/
+
+# Generated exports and archives
+*.csv
+*.xlsx
+*.zip
+
+# Logs and process files
+*.log
+logs/
+*.pid
+*.seed
+*.pid.lock
+
+# Editor and OS files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Local testing and temporary files
+.tmp/
+tmp/
+test-results/
+playwright-report/

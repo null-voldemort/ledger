@@ -1,0 +1,5 @@
+{
+  "name": "Pace IT Management",
+  "description": "Pace IT company income, expenses, employee profiles, salary, loans, and daily ledger management.",
+  "requestFramePermissions": ["camera"]
+}
