@@ -71,7 +71,7 @@ function ctxFor(hash: string): any {
   for (const t of db.getAllTransactions(false)) {
     const k = `${t.txDate}|${t.kind}|${t.amountPaisa}`;
     existing.set(k, [...(existing.get(k) || []), t.voucherNo]);
-    if (['salary', 'salary_advance', 'loan_issue', 'loan_repayment'].includes(t.categoryGroup) && t.employeeName) {
+    if (['salary', 'salary_advance', 'loan_issue', 'loan_repayment'].includes(t.categoryGroup ?? '') && t.employeeName) {
       const linkedKey = `${t.txDate}|${t.categoryGroup}|${norm(t.employeeName)}|${t.amountPaisa}`;
       existingLinked.set(linkedKey, [...(existingLinked.get(linkedKey) || []), t.voucherNo]);
     }
@@ -247,7 +247,7 @@ test('loan repayment cash treatment is explicit and is reflected in closing-bala
   const alreadyRecorded = JSON.parse(JSON.stringify(plan));
   alreadyRecorded.loanRepayments[0].treatment = 'already-recorded';
   const baseline = X.validateImportPlan(alreadyRecorded, ctx).reconcile.find((row) => row.label.startsWith('Cash balance after import'))!;
-  assert.equal(closing.imported - baseline.imported, 2500, 'cash treatment adds only the repayment amount to projected cash');
+  assert.equal((closing.imported ?? 0) - (baseline.imported ?? 0), 2500, 'cash treatment adds only the repayment amount to projected cash');
   assert.equal(closing.ok, false, 'cash received is additional income not in the workbook cash-book total');
   assert.ok(checked.plan.loanRepayments[0].issues?.some((issue) => issue.level === 'warn' && /creates a new income transaction/.test(issue.message)));
 });
